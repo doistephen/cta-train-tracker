@@ -8,7 +8,7 @@ const mapId = '40570';
 const urlAppend = `?key=${key}&mapid=${mapId}&outputType=JSON`;
 
 export const Greeting = () => {
-  const { get, loading } = useFetch(
+  const { get } = useFetch(
     'http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx',
   );
 
