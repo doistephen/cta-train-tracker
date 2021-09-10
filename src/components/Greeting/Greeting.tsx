@@ -9,7 +9,7 @@ const urlAppend = `?key=${key}&mapid=${mapId}&outputType=JSON`;
 
 export const Greeting = () => {
   const { get } = useFetch(
-    'http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx',
+    'https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx',
   );
 
   useEffect(() => {
