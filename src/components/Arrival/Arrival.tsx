@@ -3,7 +3,7 @@ export default function Arrival(props) {
   const estimatedArrivalTime = new Date(props.data.arrT);
 
   const minutesRemaining = () => {
-    const diffMs = estimatedArrivalTime - timeGenerated;
+    const diffMs = estimatedArrivalTime.getTime() - timeGenerated.getTime();
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
 
     return diffMins;
