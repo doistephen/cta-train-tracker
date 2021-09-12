@@ -7,10 +7,18 @@ export default function Section(props) {
         {props.direction}
       </h2>
       <ul className="rounded bg-background-primary">
-        <Arrival variant="next" />
+        {props.data.map((details, index, arr) => (
+          <Arrival
+            key={details.rn}
+            variant="upcoming"
+            data={details}
+            index={index}
+            length={arr.length}
+          />
+        ))}
         {/* <Arrival variant="upcoming" />
         <Arrival variant="upcoming" /> */}
-        <Arrival variant="upcoming" lastChild />
+        {/* <Arrival variant="upcoming" lastChild /> */}
       </ul>
     </section>
   );
