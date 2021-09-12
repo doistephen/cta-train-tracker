@@ -11,7 +11,6 @@ const stpIdSouth = '30112';
 const urlAppend = `?key=${key}&mapid=${mapId}&max=4&outputType=JSON`;
 
 export default function Home() {
-  const [arrivals, setArrivals] = useState([]);
   const [northArrivals, setNorthArrivals] = useState([]);
   const [southArrivals, setSouthArrivals] = useState([]);
   const { get } = useFetch(
