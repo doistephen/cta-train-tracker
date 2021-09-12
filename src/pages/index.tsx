@@ -22,8 +22,7 @@ export default function Home() {
   const getTrainArrivals = () => {
     setIsLoading(true);
     get(urlAppend)
-      .then((response) => response.json()) // @ts-ignore
-      .then((data) => data.ctatt.eta)
+      .then((data) => data.ctatt.eta) // @ts-ignore
       .then((arrivals) => {
         setNorthArrivals(
           arrivals.filter((arrival) => arrival.stpId == stpIdNorth),
