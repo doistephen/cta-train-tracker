@@ -22,10 +22,8 @@ export default function Home() {
   const getTrainArrivals = () => {
     setIsLoading(true);
     get(urlAppend)
-      .then((data) => {
-        setArrivals(data.ctatt.eta);
-        return data.ctatt.eta;
-      })
+      .then((response) => response.json()) // @ts-ignore
+      .then((data) => data.ctatt.eta)
       .then((arrivals) => {
         setNorthArrivals(
           arrivals.filter((arrival) => arrival.stpId == stpIdNorth),
@@ -49,7 +47,7 @@ export default function Home() {
 
   const formatDate = (dateString) => {
     const options = { hour: 'numeric', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString(undefined, options);
+    return new Date(dateString).toLocaleTimeString(undefined, options); // @ts-ignore
   };
 
   return (
