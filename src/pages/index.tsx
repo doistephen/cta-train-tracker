@@ -22,7 +22,10 @@ export default function Home() {
   const getTrainArrivals = () => {
     setIsLoading(true);
     get(urlAppend)
-      .then((data) => data.ctatt.eta)
+      .then((data) => {
+        setArrivals(data.ctatt.eta);
+        return data.ctatt.eta;
+      })
       .then((arrivals) => {
         setNorthArrivals(
           arrivals.filter((arrival) => arrival.stpId == stpIdNorth),
@@ -44,13 +47,25 @@ export default function Home() {
     getTrainArrivals();
   }, []);
 
+  const formatDate = (dateString) => {
+    const options = { hour: 'numeric', minute: '2-digit' };
+    return new Date(dateString).toLocaleTimeString(undefined, options);
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-start h-full px-4 antialiased text-display-primary bg-background-secondary">
       <div className="w-full max-w-sm pt-32 space-y-10">
-        <h1 className="flex flex-col space-y-1 font-bold leading-none tracking-tighter text-headline">
-          <span>California Arrivals</span>
-          <span className="text-accent">Chicago Blue Line</span>
-        </h1>
+        <header className="space-y-2">
+          <h1 className="flex -ml-0.5 flex-col space-y-1 font-bold leading-none tracking-tighter text-headline">
+            <span>California Arrivals</span>
+            <span className="text-accent">Chicago Blue Line</span>
+          </h1>
+          {northArrivals.length > 0 ? (
+            <small className="block text-display-secondary">
+              Last updated: {formatDate(northArrivals[0].prdt)}
+            </small>
+          ) : null}
+        </header>
         <div className="space-y-8">
           <Section direction="South" data={southArrivals} />
           <Section direction="North" data={northArrivals} />

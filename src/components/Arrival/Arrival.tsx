@@ -1,9 +1,4 @@
 export default function Arrival(props) {
-  const formatDate = (dateString) => {
-    const options = { hour: 'numeric', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString(undefined, options);
-  };
-
   const timeGenerated = new Date(props.data.prdt);
   const estimatedArrivalTime = new Date(props.data.arrT);
 
