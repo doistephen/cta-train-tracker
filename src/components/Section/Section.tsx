@@ -16,9 +16,6 @@ export default function Section(props) {
             length={arr.length}
           />
         ))}
-        {/* <Arrival variant="upcoming" />
-        <Arrival variant="upcoming" /> */}
-        {/* <Arrival variant="upcoming" lastChild /> */}
       </ul>
     </section>
   );

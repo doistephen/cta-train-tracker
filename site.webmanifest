@@ -1,6 +1,6 @@
 {
   "display": "standalone",
-  "short_name": "California Train Tracker",
+  "short_name": "CTA Arrivals",
   "icons": [
     {
       "src": "/manifest-icon-192.png",

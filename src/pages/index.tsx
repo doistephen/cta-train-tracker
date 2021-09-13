@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
+import useFormatTime from 'hooks/useFormatTime';
 import Section from 'components/Section/Section';
 import RefreshButton from 'components/RefreshButton/RefreshButton';
 
@@ -8,7 +9,7 @@ const mapId = '40570';
 const stpIdNorth = '30111';
 const stpIdSouth = '30112';
 
-const urlAppend = `?key=${key}&mapid=${mapId}&max=4&outputType=JSON`;
+const urlAppend = `?key=${key}&mapid=${mapId}&max=10&outputType=JSON`;
 
 export default function Home() {
   const [northArrivals, setNorthArrivals] = useState([]);
@@ -32,6 +33,7 @@ export default function Home() {
       })
       .then(() => {
         setIsLoading(false);
+        console.log(northArrivals);
       })
       .catch((error) => {
         console.log(error);
@@ -43,28 +45,24 @@ export default function Home() {
     getTrainArrivals();
   }, []);
 
-  const formatDate = (dateString) => {
-    const options = { hour: 'numeric', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString(undefined, options); // @ts-ignore
-  };
-
   return (
     <div className="relative flex flex-col items-center justify-start h-full px-4 antialiased text-display-primary bg-background-secondary">
       <div className="w-full max-w-sm pt-32 space-y-10">
-        <header className="space-y-2">
+        <header className="space-y-3">
           <h1 className="flex -ml-0.5 flex-col space-y-1 font-bold leading-none tracking-tighter text-headline">
+            <span className="text-accent">CTA Blue Line</span>
             <span>California Arrivals</span>
-            <span className="text-accent">Chicago Blue Line</span>
           </h1>
           {northArrivals.length > 0 ? (
             <small className="block text-display-secondary">
-              Last updated: {formatDate(northArrivals[0].prdt)}
+              Arrival info last received at{' '}
+              {useFormatTime(northArrivals[0].prdt)}
             </small>
           ) : null}
         </header>
         <div className="space-y-8">
-          <Section direction="South" data={southArrivals} />
-          <Section direction="North" data={northArrivals} />
+          <Section direction="Forest Park" data={southArrivals} />
+          <Section direction="O'Hare" data={northArrivals} />
         </div>
         <div className="fixed left-0 right-0 flex justify-center bottom-12">
           <RefreshButton onClick={getTrainArrivals} isLoading={isLoading} />

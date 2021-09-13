@@ -24,6 +24,7 @@ module.exports = {
       lg: '20px',
       DEFAULT: '16px',
       sm: '14px',
+      xs: '13px',
     },
     letterSpacing: {
       tighter: '-.02em',
