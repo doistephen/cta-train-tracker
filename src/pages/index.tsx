@@ -9,14 +9,14 @@ const mapId = '40570';
 const stpIdNorth = '30111';
 const stpIdSouth = '30112';
 
+const urlProxy = 'https://cors-anywhere.herokuapp.com/';
+const urlRoot = 'https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx';
 const urlAppend = `?key=${key}&mapid=${mapId}&max=10&outputType=JSON`;
 
 export default function Home() {
   const [northArrivals, setNorthArrivals] = useState([]);
   const [southArrivals, setSouthArrivals] = useState([]);
-  const { get } = useFetch(
-    'https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx',
-  );
+  const { get } = useFetch(urlProxy + urlRoot);
   const [isLoading, setIsLoading] = useState(false);
 
   const getTrainArrivals = () => {
